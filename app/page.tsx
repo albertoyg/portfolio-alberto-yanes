@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MeSection, ProjectsSection, SkillsSection, ContactSection } from "./sections";
+import { MeSection, ProjectsSection, SkillsSection, ContactSection, ExperienceSection } from "./sections";
 import { User, Workflow, CodeXml, Signal, Briefcase } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
+import myAvatar from "@/app/assets/me.png";
+import Image from "next/image";
+import { CursorSmoke } from "./components/CursorSmoke";
 
 type Tab = "me" | "projects" | "skills" | "contact" | "experience";
 
@@ -66,12 +69,13 @@ export default function Home() {
       case "contact":
         return <ContactSection />;
       case "experience":
-        return <ContactSection />;
+        return <ExperienceSection />;
     }
   };
 
   return (
   <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 relative overflow-hidden">
+    <CursorSmoke />
     {/* Theme Toggle */}
     <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
@@ -113,9 +117,14 @@ export default function Home() {
         My Portfolio
       </h1>
 
-      {/* Avatar Placeholder */}
-      <div className="w-40 h-40 mb-10 rounded-full bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center">
-        <span className="text-6xl">🧑‍💻</span>
+      {/* Avatar */}
+      <div className="mb-6 -mt-12">
+        <Image 
+          src={myAvatar} 
+          alt="Alberto.YG" 
+          width={160} 
+          height={160}
+        />
       </div>
 
       {/* Navigation Tabs */}
@@ -145,7 +154,7 @@ export default function Home() {
     </header>
 
     {/* Scrollable Content Section */}
-    <main className="relative z-10 pt-[525px] pb-16 px-6 min-h-screen">
+    <main className="relative z-10 pt-[520px] pb-16 px-6 min-h-screen">
       <div className="max-w-2xl mx-auto">
         <div className="w-full bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-xl shadow-zinc-200/50 dark:shadow-zinc-900/50">
           {renderSection()}
