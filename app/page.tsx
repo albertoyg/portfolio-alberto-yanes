@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { MeSection, ProjectsSection, SkillsSection, ContactSection } from "./sections";
+import { User, Workflow, CodeXml, Signal, Briefcase } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
-type Tab = "me" | "projects" | "skills" | "contact";
+type Tab = "me" | "projects" | "skills" | "contact" | "experience";
 
-const tabs: { id: Tab; label: string; icon: string; color: string }[] = [
-  { id: "me", label: "Me", icon: "😊", color: "text-emerald-500" },
-  { id: "projects", label: "Projects", icon: "💼", color: "text-sky-500" },
-  { id: "skills", label: "Skills", icon: "📚", color: "text-violet-500" },
-  { id: "contact", label: "Contact", icon: "🔑", color: "text-amber-500" },
+const tabs: { id: Tab; label: string; icon: LucideIcon; color: string }[] = [
+  { id: "me", label: "Me", icon: User, color: "text-emerald-500" },
+  { id: "projects", label: "Projects", icon: Workflow, color: "text-sky-500" },
+  { id: "skills", label: "Skills", icon: CodeXml, color: "text-violet-500" },
+  { id: "experience", label: "Experience", icon: Briefcase, color: "text-blue-500" },
+  { id: "contact", label: "Contact", icon: Signal, color: "text-amber-500" },
 ];
 
 function ThemeToggle({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
@@ -62,86 +65,93 @@ export default function Home() {
         return <SkillsSection />;
       case "contact":
         return <ContactSection />;
+      case "experience":
+        return <ContactSection />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Theme Toggle */}
-      <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+  <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 relative overflow-hidden">
+    {/* Theme Toggle */}
+    <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
-      {/* Watermark */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none">
-        <span className="text-[12rem] md:text-[16rem] font-black text-zinc-300 dark:text-zinc-900 tracking-tighter leading-none">
-          Portfolio
-        </span>
+    {/* Watermark */}
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0">
+      <span className="text-[12rem] md:text-[16rem] font-black text-zinc-300 dark:text-zinc-900 tracking-tighter leading-none">
+        ALBERTO.YG
+      </span>
+    </div>
+
+    {/* Fixed Header + Nav Section */}
+    <header className="fixed top-0 left-0 right-0 z-20 flex flex-col items-center pt-16 pb-4 bg-gradient-to-b from-zinc-50 via-zinc-50 to-transparent dark:from-zinc-950 dark:via-zinc-950 dark:to-transparent">
+      {/* Logo */}
+      <div className="mb-6">
+        <svg
+          className="w-10 h-10"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 4L4 14V26L20 36L36 26V14L20 4Z"
+            fill="currentColor"
+            className="text-zinc-900 dark:text-zinc-100"
+          />
+          <path
+            d="M20 4L4 14L20 24L36 14L20 4Z"
+            fill="currentColor"
+            className="text-zinc-700 dark:text-zinc-300"
+          />
+        </svg>
       </div>
 
-      <main className="relative z-10 flex flex-col items-center w-full max-w-2xl px-6 py-16">
-        {/* Logo */}
-        <div className="mb-6">
-          <svg
-            className="w-10 h-10"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      {/* Header */}
+      <h2 className="text-lg text-zinc-600 dark:text-zinc-400 mb-1">
+        Hey, I&apos;m Alberto 👋
+      </h2>
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
+        My Portfolio
+      </h1>
+
+      {/* Avatar Placeholder */}
+      <div className="w-40 h-40 mb-10 rounded-full bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center">
+        <span className="text-6xl">🧑‍💻</span>
+      </div>
+
+      {/* Navigation Tabs */}
+      <nav className="flex gap-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`
+              flex flex-col items-center gap-1 px-5 py-3 rounded-xl transition-all duration-200
+              ${
+                activeTab === tab.id
+                  ? "bg-white dark:bg-zinc-800 shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50 scale-105"
+                  : "bg-white/50 dark:bg-zinc-800/50 hover:bg-white dark:hover:bg-zinc-800"
+              }
+            `}
           >
-            <path
-              d="M20 4L4 14V26L20 36L36 26V14L20 4Z"
-              fill="currentColor"
-              className="text-zinc-900 dark:text-zinc-100"
-            />
-            <path
-              d="M20 4L4 14L20 24L36 14L20 4Z"
-              fill="currentColor"
-              className="text-zinc-700 dark:text-zinc-300"
-            />
-          </svg>
-        </div>
+            <span className={`w-6 h-6 flex items-center justify-center ${tab.color}`}>
+              <tab.icon size={20} />
+            </span>
+            <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+              {tab.label}
+            </span>
+          </button>
+        ))}
+      </nav>
+    </header>
 
-        {/* Header */}
-        <h2 className="text-lg text-zinc-600 dark:text-zinc-400 mb-1">
-          Hey, I&apos;m Alberto 👋
-        </h2>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
-          My Portfolio
-        </h1>
-
-        {/* Avatar Placeholder */}
-        <div className="w-40 h-40 mb-10 rounded-full bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center">
-          <span className="text-6xl">🧑‍💻</span>
-        </div>
-
-        {/* Navigation Tabs */}
-        <nav className="flex gap-2 mb-12">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`
-                flex flex-col items-center gap-1 px-5 py-3 rounded-xl transition-all duration-200
-                ${
-                  activeTab === tab.id
-                    ? "bg-white dark:bg-zinc-800 shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50 scale-105"
-                    : "bg-white/50 dark:bg-zinc-800/50 hover:bg-white dark:hover:bg-zinc-800"
-                }
-              `}
-            >
-              <span className={`w-6 h-6 flex items-center justify-center text-base ${tab.color}`}>
-                {tab.icon}
-              </span>
-              <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
-                {tab.label}
-              </span>
-            </button>
-          ))}
-        </nav>
-
-        {/* Content Section */}
+    {/* Scrollable Content Section */}
+    <main className="relative z-10 pt-[525px] pb-16 px-6 min-h-screen">
+      <div className="max-w-2xl mx-auto">
         <div className="w-full bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-xl shadow-zinc-200/50 dark:shadow-zinc-900/50">
           {renderSection()}
         </div>
-      </main>
-    </div>
-  );
+      </div>
+    </main>
+  </div>
+);
 }
