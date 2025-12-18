@@ -74,42 +74,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen relative">
-
+    <div className="h-screen overflow-hidden relative">
     <FluidCursor />
     {/* Theme Toggle */}
     <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
     {/* Watermark */}
-    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none z-1">
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none z-[1]">
       <span className="text-[12rem] md:text-[16rem] font-black text-zinc-300/30 dark:text-zinc-800/30 tracking-tighter leading-none">
         ALBERTO.YG
       </span>
     </div>
 
     {/* Fixed Header + Nav Section */}
-    <header className="fixed top-0 left-0 right-0 z-20 flex flex-col items-center pt-16 pb-4 pointer-events-none">
-      {/* Logo */}
-      <div className="mb-6 pointer-events-auto">
-        <svg
-          className="w-10 h-10"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M20 4L4 14V26L20 36L36 26V14L20 4Z"
-            fill="currentColor"
-            className="text-zinc-900 dark:text-zinc-100"
-          />
-          <path
-            d="M20 4L4 14L20 24L36 14L20 4Z"
-            fill="currentColor"
-            className="text-zinc-700 dark:text-zinc-300"
-          />
-        </svg>
-      </div>
-
+    <header className="fixed top-0 left-0 right-0 z-30 flex flex-col items-center pt-8 pb-4 pointer-events-none">
       {/* Header */}
       <h2 className="text-lg text-zinc-600 dark:text-zinc-400 mb-1">
         Hey, I&apos;m Alberto 👋
@@ -154,17 +132,20 @@ export default function Home() {
       </nav>
     </header>
 
-    <div className="fixed top-0 left-0 right-0 h-[500px] z-5 pointer-events-none  from-zinc-950 via-zinc-950/80 to-transparent dark:from-zinc-950 dark:via-zinc-950/80" />
-
-
-    {/* Scrollable Content Section */}
-    <main className="relative z-10 pt-[520px] pb-16 px-6 min-h-screen">
+    {/* Scrollable Content Container */}
+    <div 
+      className="h-screen overflow-y-auto pt-[410px] pb-16 px-6 relative z-10"
+      style={{
+        maskImage: 'linear-gradient(to bottom, transparent 0px, transparent 400px, black 420px)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0px, transparent 400px, black 420px)',
+      }}
+    >
       <div className="max-w-2xl mx-auto">
         <div className="w-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl shadow-zinc-200/50 dark:shadow-zinc-900/50">
           {renderSection()}
         </div>
       </div>
-    </main>
-  </div>
+    </div>
+    </div>
 );
 }

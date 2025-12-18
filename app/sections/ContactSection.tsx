@@ -1,31 +1,33 @@
+import { Mail, Github, Linkedin } from 'lucide-react';
+
 export function ContactSection() {
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl font-bold mb-4 text-text-primary">Contact</h2>
       <div className="space-y-3">
         <a
-          href="mailto:your@email.com"
+          href="mailto:albertoyanesgca@gmail.com"
           className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors"
         >
-          <span>📧</span>
-          <span>your@email.com</span>
+          <Mail />
+          <span>albertoyanesgca@gmail.com</span>
         </a>
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/albertoyg"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors"
         >
-          <span>🐙</span>
+          <Github />
           <span>GitHub</span>
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/albertoyg/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors"
         >
-          <span>💼</span>
+          <Linkedin />
           <span>LinkedIn</span>
         </a>
       </div>
