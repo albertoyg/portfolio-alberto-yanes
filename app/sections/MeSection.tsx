@@ -14,7 +14,7 @@ export function MeSection() {
         <h3 className="font-semibold text-text-primary mb-2 flex items-center gap-2"><GraduationCap /> Education</h3>
         <p className="text-text-secondary font-medium">B.Sc. Computer Science</p>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">University of Victoria</p>
-        <p className="text-xs text-zinc-400">Sept 2019 - Aug 2023 • GPA: 3.7/4</p>
+        <p className="text-xs text-zinc-400">Sept 2019 - Aug 2023 • GPA: 3.7</p>
       </div>
     </div>
   );
